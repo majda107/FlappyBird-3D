@@ -1,0 +1,11 @@
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\bin\Debug\FlappyBirdV2.exe.config
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\bin\Debug\FlappyBirdV2.exe
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\bin\Debug\FlappyBirdV2.pdb
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\bin\Debug\OpenTK.dll
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\bin\Debug\OpenTK.pdb
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\bin\Debug\OpenTK.xml
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\obj\Debug\FlappyBirdV2.csprojAssemblyReference.cache
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\obj\Debug\FlappyBirdV2.csproj.CoreCompileInputs.cache
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\obj\Debug\FlappyBirdV2.csproj.CopyComplete
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\obj\Debug\FlappyBirdV2.exe
+C:\Users\Marián Trpkoš\source\repos\FlappyBirdV2\FlappyBirdV2\obj\Debug\FlappyBirdV2.pdb
