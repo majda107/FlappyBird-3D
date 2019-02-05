@@ -32,6 +32,6 @@ namespace FlappyBirdV2.Solids
         {
             return new Vector3((float)x, (float)y, (float)z);
         }
-        public abstract void collide(Entity e);
+        public abstract bool collide(Entity e);
     }
 }

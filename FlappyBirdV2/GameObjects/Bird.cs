@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FlappyBirdV2.Solids;
 
-namespace FlappyBirdV2
+namespace FlappyBirdV2.GameObjects
 {
     class Bird : Cube
     {
@@ -44,12 +44,13 @@ namespace FlappyBirdV2
                 this.y = 30;
                 velocity = this.y;
             }
+
+            this.draw();
         }
 
-        public void pipeCollide(Pipe pipe)
+        public bool pipeCollide(Pipe pipe)
         {
-            this.collide(pipe.bottomPart);
-            this.collide(pipe.topPart);
+            return this.collide(pipe.bottomPart) || this.collide(pipe.topPart);
         }
     }
 }

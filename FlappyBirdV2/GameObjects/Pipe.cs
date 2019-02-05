@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FlappyBirdV2.Solids;
 
-namespace FlappyBirdV2
+namespace FlappyBirdV2.GameObjects
 {
     class Pipe
     {
@@ -28,15 +28,17 @@ namespace FlappyBirdV2
             this.zSpeed = 1.0;
         }
 
-        public void update()
+        public void update(double gameSpeed)
         {
-            this.zPos += zSpeed;
+            this.zPos += (zSpeed) * gameSpeed;
 
             this.bottomPart.z = zPos;
-            this.topPart.z = zPos;            
+            this.topPart.z = zPos;
+
+            this.draw();
         }
 
-        public void draw()
+        private void draw()
         {
             this.topPart.draw();
             this.bottomPart.draw();

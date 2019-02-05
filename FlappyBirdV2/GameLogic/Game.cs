@@ -7,37 +7,32 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using FlappyBirdV2.Solids;
 
-namespace FlappyBirdV2
+namespace FlappyBirdV2.GameLogic
 {
+    enum GameState { Menu, InGame };
     class Game
     {
         public GameWindow gw { get; private set; }
-
-        public double frameCount;
-
-        public Bird bird;
-        public List<Pipe> pipes;
+        public GameData gd { get; private set; }
+        public GameState gs { get; private set; }
 
         private bool mouseDown;
         private bool spaceDown;
 
-        private Random rand;
         public Game(GameWindow gw)
         {
-            
-            this.rand = new Random();
-            this.pipes = new List<Pipe>();
-            this.bird = new Bird(0, 0, 0, 5, new float[3] { 0.6f, 0.2f, 0.2f });
-
             this.mouseDown = false;
             this.spaceDown = false;
             
             this.gw = gw;
-            this.frameCount = 0;
+            this.gd = new GameData(1.0);
+            this.gs = GameState.InGame;
         }
-
+        
         public void Start()
         {
+            gd.Collide += Collision;
+
             gw.Load += Loaded;
 
             gw.MouseDown += MouseDown;
@@ -71,58 +66,47 @@ namespace FlappyBirdV2
             if (e.Key == OpenTK.Input.Key.Space) spaceDown = false;
         }
 
-        public void Loaded(Object o, EventArgs e)
+        private void Loaded(Object o, EventArgs e)
         {
             GL.ClearColor(1.0f, 1.0f, 1.0f, 0.0f);
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.Lighting);
             GL.Enable(EnableCap.ColorMaterial);
 
-            float[] light_pos = { 10f, 10f, 50f };
-            float[] ambient = { 0.5f, 0.5f, 0.5f };
-            float[] diffuse = { 1.0f, 1.0f, 1.0f };
-
-            GL.Light(LightName.Light0, LightParameter.Position, light_pos);
-            GL.Light(LightName.Light0, LightParameter.Ambient, ambient);
-            GL.Light(LightName.Light0, LightParameter.Diffuse, diffuse);
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 10f, 10f, 50f });
+            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.5f, 0.5f, 0.5f });
+            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f });
 
             GL.Enable(EnableCap.Light0);
         }
 
-        public void RenderF(Object o, EventArgs e)
+        private void RenderF(Object o, EventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit); // clearing buffers
 
             GL.MatrixMode(MatrixMode.Projection);
             Matrix4 perspective = Matrix4.CreatePerspectiveFieldOfView((float)MathHelper.DegreesToRadians(45.0), (float)gw.Width / (float)gw.Height, 1.0f, 1000.0f);
             GL.LoadMatrix(ref perspective);
             GL.MatrixMode(MatrixMode.Modelview);
 
-            GL.LoadIdentity();
+            GL.LoadIdentity(); // reseting matrix
 
             GL.Translate(0.0, 0.0, -80.0);
             GL.Rotate(-25, 0.0, 1.0, 0.0);
 
-            if (this.mouseDown || this.spaceDown) bird.moveUp();
-
-            if(frameCount % 80 == 0) pipes.Add(new Pipe(0, 0, -600, 10, 80, 10, rand.Next(-20, 20), 20));
-
-            bird.update();
-            bird.draw();
-
-            for (int i = pipes.Count - 1; i >= 0; i--)
+            if (gs == GameState.InGame)
             {
-                pipes[i].draw();
-                pipes[i].update();
-
-                bird.pipeCollide(pipes[i]);
-
-                if (pipes[i].zPos > 200) pipes.RemoveAt(i);
+                gd.Frame(this.mouseDown, this.spaceDown);
             }
 
             gw.SwapBuffers();
+        }
 
-            frameCount++;
+        private void Collision(Object o, FlappyEventArgs e)
+        {
+            gd = new GameData(1.0);
+            Console.WriteLine(e.score);
+            gd.Collide += Collision;
         }
 
         public void Resized(Object o, EventArgs e)

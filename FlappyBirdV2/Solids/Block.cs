@@ -24,7 +24,7 @@ namespace FlappyBirdV2.Solids
             this.sizez = sizez;
             this.color = color;
         }
-        public override void collide(Entity e)
+        public override bool collide(Entity e)
         {
             throw new NotImplementedException();
         }

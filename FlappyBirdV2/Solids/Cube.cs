@@ -20,9 +20,9 @@ namespace FlappyBirdV2.Solids
             this.size = size;
             this.color = color;
         }
-        public override void collide(Entity e)
+        public override bool collide(Entity e)
         {
-            if(e is Block)
+            if (e is Block)
             {
                 Block block = e as Block;
                 double x1 = -(size / 2) + x;
@@ -44,9 +44,11 @@ namespace FlappyBirdV2.Solids
 
                 if ((x2 > x3 && x1 < x4) && (y2 > y3 && y1 < y4) && (z2 > z3 && z1 < z4))
                 {
-                    Console.WriteLine("Collision!");
+                    return true;
                 }
+                else return false;
             }
+            else return false;
         }
 
         public void draw()

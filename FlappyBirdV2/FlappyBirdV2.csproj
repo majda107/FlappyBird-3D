@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bird.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Pipe.cs" />
+    <Compile Include="FlappyEventArgs.cs" />
+    <Compile Include="GameObjects\Bird.cs" />
+    <Compile Include="GameLogic\Game.cs" />
+    <Compile Include="GameObjects\Pipe.cs" />
+    <Compile Include="GameLogic\GameData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solids\Block.cs" />
